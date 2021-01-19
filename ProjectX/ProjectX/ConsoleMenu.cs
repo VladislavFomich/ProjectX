@@ -19,7 +19,9 @@ namespace ProjectX
             do
             {
                 Console.Clear();
-                Console.WriteLine("               ProjectX");
+               
+                Console.WriteLine("ProjectX");
+             
                 for (int i = 0; i < menuItems.Length; i++)
                 {
                     if (counter == i)
@@ -48,6 +50,7 @@ namespace ProjectX
             }
             while (key.Key != ConsoleKey.Enter);
             return counter;
+            
         }
         delegate void method();
        public static void StartMenu()

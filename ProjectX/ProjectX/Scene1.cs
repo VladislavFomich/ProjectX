@@ -18,7 +18,8 @@ namespace ProjectX
             switch (insert)
             {
                 case "1":
-                    Maze.StartMaze();
+                    Maze maze = new Maze();
+                    maze.StartMaze();
                     break;
                 case "2":
                     Console.WriteLine("Тогда пока");
