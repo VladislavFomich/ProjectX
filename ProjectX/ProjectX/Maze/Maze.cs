@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using static System.Console;
+using System.Linq;
 
 
 
@@ -11,24 +12,43 @@ namespace ProjectX
     {
         private MazeWorld myMaze;
         private MazePlayer mazePlayer;
+        private MazeParts mazeParts1;
+        private int parts = 0;
+        private int step = 5;
         public void StartMaze()
         {
             char[,] maze =   {{'-','-','-','-','-'},
-                              {'|',' ','!','!','|'},
-                              {'|',' ',' ','!','|'},
+                              {'|',' ',' ',' ','|'},
+                              {'|',' ',' ',' ','|'},
                               {'-','-','-','-','-'}
              };
 
             myMaze = new MazeWorld(maze);
             mazePlayer = new MazePlayer(1, 1);
+            mazeParts1 = new MazeParts(3, 1);
             RunGameLoop();
         }
+        private void Lose()
+        {
+            Clear();
+            WriteLine("You Lose");
+            Environment.Exit(0);
+        }
+        private void Conditions()
+        {
+            SetCursorPosition(55, 0);
+            WriteLine(step--);
+            SetCursorPosition(55, 1);
+            WriteLine($"Собранные части {parts}");
+        }
+        
         private void DrawFrame()
         {
             Clear();
             myMaze.Draw();
-            mazePlayer.Draw();      
-            WriteLine($"Собранные части {parts}");
+            mazeParts1.Draw();
+            mazePlayer.Draw();
+            Conditions();
         }
         private void PlayerInput()
         {
@@ -56,29 +76,31 @@ namespace ProjectX
                     break;
             }
         }
-        private int parts = 0;
+
         
         private void RunGameLoop()
         {
             while (true)
             {
                 DrawFrame();
-                PlayerInput();
-                char elementAtPlayerPos = myMaze.GetElementAt(mazePlayer.X, mazePlayer.Y);
-           
-                if (elementAtPlayerPos == '!')
+                PlayerInput(); 
+                int[] playerPosition = { mazePlayer.X, mazePlayer.Y };
+                int[] parts1Position = { mazeParts1.X, mazeParts1.Y };
+
+                if (playerPosition.SequenceEqual(parts1Position))
                 {
-                    
+                    mazeParts1.X = 6;
+                    mazeParts1.Y = 0;
                     parts++;
-                    if (parts == 99)
-                    {
-                        break;
-                    }
                 }
+                if (parts == 1)
+                    break;
+                if (step == 0)
+                    Lose();
+              
                 System.Threading.Thread.Sleep(20);
             }
-            Clear();
-            WriteLine("Ура"); 
+            new Scene2().StartScene2();
         }
     }
 }

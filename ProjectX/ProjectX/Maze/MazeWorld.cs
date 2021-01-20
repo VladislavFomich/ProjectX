@@ -27,16 +27,7 @@ namespace ProjectX
                 {
                     char element = Maze[y, x];
                     SetCursorPosition(x, y);
-                    if (element == '!')
-                    {
-                        ForegroundColor = ConsoleColor.Red;
-                    }
-                    else
-                    {
-                        ForegroundColor = ConsoleColor.White;
-                    }
                     Write(element);
-                    
                 }
             }
         }
@@ -49,7 +40,9 @@ namespace ProjectX
             if (x < 0 || y < 0 || x >= Cols || y >= Rows)
                 return false;
 
-            return Maze[y, x] == ' ' || Maze[y, x] == '!';
+            if (Maze[y, x] == '-' || Maze[y, x] == '|')
+                return false;
+            else return true;
         }
     }
 }
