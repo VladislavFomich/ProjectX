@@ -40,6 +40,7 @@ namespace ProjectX
             WriteLine(step--);
             SetCursorPosition(55, 1);
             WriteLine($"Собранные части {parts}");
+            MazeTimer.StartTimer();
         }
         
         private void DrawFrame()
@@ -76,8 +77,6 @@ namespace ProjectX
                     break;
             }
         }
-
-        
         private void RunGameLoop()
         {
             while (true)

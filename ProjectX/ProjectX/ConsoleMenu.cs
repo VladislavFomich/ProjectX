@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using static System.Console;
 
 namespace ProjectX
 {
@@ -18,25 +19,24 @@ namespace ProjectX
             ConsoleKeyInfo key;
             do
             {
-                Console.Clear();
-               
-                Console.WriteLine("ProjectX");
+                Clear();              
+                WriteLine("ProjectX");
              
                 for (int i = 0; i < menuItems.Length; i++)
                 {
                     if (counter == i)
                     {
-                        Console.BackgroundColor = ConsoleColor.Green;
-                        Console.ForegroundColor = ConsoleColor.Black;
-                        Console.WriteLine(menuItems[i]);
-                        Console.BackgroundColor = ConsoleColor.Black;
-                        Console.ForegroundColor = ConsoleColor.White;
+                        BackgroundColor = ConsoleColor.Green;
+                        ForegroundColor = ConsoleColor.Black;
+                        WriteLine(menuItems[i]);
+                        BackgroundColor = ConsoleColor.Black;
+                        ForegroundColor = ConsoleColor.White;
                     }
                     else
-                        Console.WriteLine(menuItems[i]);
+                        WriteLine(menuItems[i]);
 
                 }
-                key = Console.ReadKey();
+                key = ReadKey();
                 if (key.Key == ConsoleKey.UpArrow)
                 {
                     counter--;
@@ -64,7 +64,7 @@ namespace ProjectX
             {
                 menuResult = menu.PrintMenu();
                 methods[menuResult]();
-                Console.ReadKey();
+                ReadKey();
             } 
             while (menuResult != items.Length - 1);
         }
@@ -79,9 +79,9 @@ namespace ProjectX
         }
         static void Exit()
         {
-            Console.Clear();
-            Console.WriteLine();
-            Console.WriteLine("Пока");
+            Clear();
+            WriteLine();
+            WriteLine("Пока");
         }
     }
 }
