@@ -5,25 +5,22 @@ using static System.Console;
 
 namespace ProjectX
 {
-    class MazePlayer
+    class MazePlayer  : MazeObject
     {
-        public int X { get; set; }
-        public int Y { get; set; }
-        private char PlayerMarker;
-        private ConsoleColor PlayerColor;
+       
         public MazePlayer(int initialX, int initialY)
         {
             X = initialX;
             Y = initialY;
-            PlayerMarker = '*';
-            PlayerColor = ConsoleColor.Green;
+            Marker = '*';
+            Color = ConsoleColor.Green;
         }
 
         public void Draw()
         {
-            ForegroundColor = PlayerColor;
+            ForegroundColor = Color;
             SetCursorPosition(X, Y);
-            Write(PlayerMarker);
+            Write(Marker);
             ResetColor();
         }
     }

@@ -75,13 +75,14 @@ namespace ProjectX
         }
         static void Settings()
         {
-
+            SettingMenu.StartSettingsMenu();
         }
         static void Exit()
         {
             Clear();
             WriteLine();
             WriteLine("Пока");
+            Environment.Exit(0);
         }
     }
 }
