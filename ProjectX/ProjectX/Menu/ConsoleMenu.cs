@@ -19,8 +19,11 @@ namespace ProjectX
             ConsoleKeyInfo key;
             do
             {
-                Clear();              
+                Clear();
+                SetCursorPosition(36, 0);
                 WriteLine("ProjectX");
+                new MenuPicture().DrowPicture();
+
              
                 for (int i = 0; i < menuItems.Length; i++)
                 {

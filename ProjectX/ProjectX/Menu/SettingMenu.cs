@@ -21,7 +21,10 @@ namespace ProjectX
             do
             {
                 Clear();
+                SetCursorPosition(36, 0);
+                 
                 WriteLine("Settings");
+                new MenuPicture().DrowPicture();
 
                 for (int i = 0; i < settingsItems.Length; i++)
                 {
@@ -79,11 +82,13 @@ namespace ProjectX
             {
                 case "1":
                     difficult = "easy";
+                    Clear();
                     WriteLine($"You sellect {difficult} difficulty");
                     WriteLine("press any button to return...");
                     ReadLine();
                     break;
                 case "2":
+                    Clear();
                     difficult = "hard";
                     WriteLine($"You sellect {difficult} difficulty");
                     WriteLine("press any button to return...");
