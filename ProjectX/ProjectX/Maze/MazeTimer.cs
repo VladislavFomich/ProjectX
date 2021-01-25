@@ -11,17 +11,13 @@ namespace ProjectX
     {
         public static void StartTimer()
         {
-            int num = 0;
-            TimerCallback tm = new TimerCallback(Count);
-            Timer timer = new Timer(tm, num, 0, 1000);
-        }
-
-        private static void Count(object obj)
-        {
-            int second = (int)obj;
-            second = 15;
-            SetCursorPosition(55, 2);
-            Console.WriteLine(second --);
+            for (int i = 30; i > 0; i--)
+            {
+                
+                SetCursorPosition(55, 2);
+                WriteLine( i );
+                Thread.Sleep(1000);
+            }
         }
     }
 }

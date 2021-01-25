@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using static System.Console;
 
+
 namespace ProjectX
 {
     class ConsoleMenu
@@ -21,10 +22,10 @@ namespace ProjectX
             {
                 Clear();
                 SetCursorPosition(36, 0);
+
                 WriteLine("ProjectX");
                 new MenuPicture().DrowPicture();
 
-             
                 for (int i = 0; i < menuItems.Length; i++)
                 {
                     if (counter == i)

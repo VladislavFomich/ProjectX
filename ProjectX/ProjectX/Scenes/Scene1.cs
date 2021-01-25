@@ -1,20 +1,27 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using static System.Console;
 
 namespace ProjectX
 {
-    class Scene1
+    class Scene1 : PlayerInfo
+       
     {
-     public static void StartScene1() 
-        {
-            Console.Clear();
-            Console.WriteLine("Привет");
-            Console.ReadLine();
+        
+        public static void StartScene1() 
+        {            
+            Clear();
+            WriteLine("Привет");
+            WriteLine("Введите свое имя");
+            Name = ReadLine();
+            WriteLine("Введите почту");
+            Mail = ReadLine();
+            
             link1:
-            Console.WriteLine("Готов начинать игру?");
-            Console.WriteLine("1- да, 2 - нет.");
-            string insert = Console.ReadLine();
+            WriteLine("Готов начинать игру?");
+            WriteLine("1- да, 2 - нет.");
+            string insert = ReadLine();
             switch (insert)
             {
                 case "1":
@@ -22,12 +29,12 @@ namespace ProjectX
                     maze.StartMaze();
                     break;
                 case "2":
-                    Console.WriteLine("Тогда пока");
+                    WriteLine("Тогда пока");
                     Environment.Exit(0);
                     break;
                         
                 default:
-                    Console.WriteLine("Неверное значение");
+                    WriteLine("Неверное значение");
                     goto link1;
             }
 
