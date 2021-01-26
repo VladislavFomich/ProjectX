@@ -16,6 +16,7 @@ namespace ProjectX
             Clear();
             WriteLine("Ура");
             WriteScore();
+            SendMailMesseage();
         }
 
         void WriteScore()
@@ -29,16 +30,34 @@ namespace ProjectX
         }
         void SendMailMesseage()
         {
-            MailAddress from = new MailAddress("projectxproject@yandex.by", "Team ProjectX");
-            MailAddress to = new MailAddress(Mail);
-            MailMessage m = new MailMessage (from, to );
-            m.Subject = "ProjectX";
-            m.Body = "You Win";
-            m.IsBodyHtml = true;
-            SmtpClient smtp = new SmtpClient("smtp.yandex.ru", 465);
-            smtp.Credentials = new NetworkCredential("projectXproject", "projectX");
-            smtp.EnableSsl = true;
-            smtp.Send(m);
+            using (MailMessage mail = new MailMessage())
+            {
+                
+                mail.From = new MailAddress("xproject894@gmail.com");
+                mail.To.Add(Mail);
+                mail.Subject = "ProjectX";
+                mail.Body = "<h1>You Win<h/>";
+                mail.IsBodyHtml = true;
+                using (SmtpClient smtp = new SmtpClient())
+                {
+                    smtp.UseDefaultCredentials = false;
+                    smtp.Credentials = new NetworkCredential("xproject894@gmail.com", "project_X_27");
+                    smtp.Host = "smtp.gmail.com";
+                    smtp.Port = 587;
+                    smtp.EnableSsl = true;
+                    smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
+                    smtp.Timeout = 3000;
+                    try
+                    {
+                        smtp.Send(mail);
+                    }
+                    catch (SmtpException e)
+                    {
+                        Console.WriteLine(e);
+                    }
+                }
+            }
+          
         }
     }
 }

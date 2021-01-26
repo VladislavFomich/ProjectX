@@ -11,5 +11,10 @@ namespace ProjectX
         public int Y { get; set; }
         protected char Marker { get; set; }
         protected ConsoleColor Color { get; set; }
+        enum MazeObjects
+        {
+            MazePlayer =1,
+            MazeParts = 2
+        }
     }
 }
