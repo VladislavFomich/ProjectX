@@ -75,7 +75,7 @@ namespace ProjectX
 
         static void Start()
         {
-            Scene1.StartScene1();
+            FirstScene.StartScene1();
         }
         static void Settings()
         {

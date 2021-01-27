@@ -14,8 +14,10 @@ namespace ProjectX
         private MazeWorld myMaze;
         private MazePlayer mazePlayer;
         private MazeParts mazeParts1;
+        private MazeParts mazeParts2;
+        private MazeParts mazeParts3;
         private int parts = 0;
-        private int step = 100;
+        private int step = 200;
         public void StartMaze()
         {
             string path = @"D:\gitHub\ProjectX\ProjectX\ProjectX\Maze\Maze1.txt";
@@ -23,29 +25,33 @@ namespace ProjectX
            
             myMaze = new MazeWorld(maze);
             mazePlayer = new MazePlayer(1, 1);
-            mazeParts1 = new MazeParts(3, 1);
+            mazeParts1 = new MazeParts(6, 13);
+            mazeParts2 = new MazeParts(31, 11);
+            mazeParts3 = new MazeParts(32, 4);
             RunGameLoop();
         }
         private void Lose()
         {
             Clear();
-            WriteLine("You Lose");
+            WriteLine("Вы проиграли!");
+            WriteLine("Для выхода введите любой символ...");
+            ReadLine();
             Environment.Exit(0);
         }
         private void Conditions()
         {
             SetCursorPosition(55, 0);
-            WriteLine(step--);
+            WriteLine($"Осталось шагов: {step--}");
             SetCursorPosition(55, 1);
-            WriteLine($"Собранные части {parts}");
-            //MazeTimer.StartTimer();
-        }
-        
+            WriteLine($"Собранные части: {parts}!");
+        }   
         private void DrawFrame()
         {
             Clear();
             myMaze.Draw();
             mazeParts1.Draw();
+            mazeParts2.Draw();
+            mazeParts3.Draw();
             mazePlayer.Draw();
             Conditions();
         }
@@ -90,21 +96,34 @@ namespace ProjectX
                 PlayerInput(); 
                 int[] playerPosition = { mazePlayer.X, mazePlayer.Y };
                 int[] parts1Position = { mazeParts1.X, mazeParts1.Y };
-
+                int[] parts2Position = { mazeParts2.X, mazeParts2.Y };
+                int[] parts3Position = { mazeParts3.X, mazeParts3.Y };
                 if (playerPosition.SequenceEqual(parts1Position))
                 {
-                    mazeParts1.X = 6;
-                    mazeParts1.Y = 0;
+                    mazeParts1.X = 73;
+                    mazeParts1.Y = 1;
                     parts++;
                 }
-                if (parts == 1)
+                if (playerPosition.SequenceEqual(parts2Position))
+                {
+                    mazeParts2.X = 73;
+                    mazeParts2.Y = 1;
+                    parts++;
+                }
+                if (playerPosition.SequenceEqual(parts3Position))
+                {
+                    mazeParts3.X = 73;
+                    mazeParts3.Y = 1;
+                    parts++;
+                }
+                if (parts == 3)
                     break;
                if (step == 0)
                    Lose();
               
                Thread.Sleep(20);
             }
-            new Scene2().StartScene2();
+            new EndScene().StartScene2();
         }
     }
 }

@@ -59,8 +59,8 @@ namespace ProjectX
         delegate void method();
         public static void StartSettingsMenu()
         {
-            string[] items = {"Difficult", "Return",};
-            method[] methods = new method[] { Difficult, Return };
+            string[] items = {"Difficult", "List of Win Player" ,"Return",};
+            method[] methods = new method[] { Difficult, WinPlayer, Return };
             SettingMenu menu = new SettingMenu(items);
             int menuResult;
             do
@@ -99,6 +99,10 @@ namespace ProjectX
                     goto link1;
             }
             StartSettingsMenu();
+        }
+       static void WinPlayer()
+        {
+            new WinPLayerList().PlayerScore();
         }
        
         static void Return()

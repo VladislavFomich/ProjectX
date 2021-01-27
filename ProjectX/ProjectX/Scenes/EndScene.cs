@@ -9,31 +9,41 @@ using System.Net;
 
 namespace ProjectX
 {
-    class Scene2 : PlayerInfo
+    class EndScene : PlayerInfo
     {
         public void StartScene2()
         {
             Clear();
-            WriteLine("Ура");
+            WriteLine($"Поздравляем {Name}, вы победили!");
             WriteScore();
-            SendMailMesseage();
+            if (Mail != null)
+            {
+                SendMailMesseage();
+            }
+            WriteLine("Для выхода введите любую кнопку...");
+            ReadLine();
+            Environment.Exit(0);
         }
-
         void WriteScore()
         {
             string path = @"D:\gitHub\ProjectX\ProjectX\ProjectX\ScoreList.txt";
-            string text = Name + " " + DateTime.Now;
-            using (StreamWriter streamWriter = new StreamWriter(path))
+            string text = "Игрок: " + Name + " Время и дата победы: " + DateTime.Now;
+            using (StreamWriter streamWriter = new StreamWriter(path, true))
             {
-                streamWriter.Write(text);
+                streamWriter.WriteLine(text);
             }
         }
         void SendMailMesseage()
         {
+            SendEmailAsync().GetAwaiter();
+            
+        }
+            private static async Task SendEmailAsync()
+            { 
             using (MailMessage mail = new MailMessage())
             {
                 
-                mail.From = new MailAddress("xproject894@gmail.com");
+                mail.From = new MailAddress("xproject894@gmail.com", "Team ProjectX");
                 mail.To.Add(Mail);
                 mail.Subject = "ProjectX";
                 mail.Body = "<h1>You Win<h/>";
@@ -46,18 +56,16 @@ namespace ProjectX
                     smtp.Port = 587;
                     smtp.EnableSsl = true;
                     smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
-                    smtp.Timeout = 3000;
                     try
                     {
-                        smtp.Send(mail);
+                       await smtp.SendMailAsync(mail);
                     }
-                    catch (SmtpException e)
+                    catch (SmtpException)
                     {
-                        Console.WriteLine(e);
+                       WriteLine("Что то пошло не так...");
                     }
                 }
-            }
-          
-        }
+}
+            }     
     }
 }
